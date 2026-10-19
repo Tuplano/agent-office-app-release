@@ -26,7 +26,7 @@
 ## What's new
 
 <!-- latest:start -->
-### v0.3.2 · 2026-10-19 · Pre-release
+### v0.3.2 · 2026-10-19
 
 First public release of Agent Office for Windows, macOS and Linux.
 

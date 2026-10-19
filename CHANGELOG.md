@@ -19,7 +19,7 @@ Updates are signed, and the app only installs ones signed with the author's key.
 ---
 
 <!-- releases -->
-## [v0.3.2](https://github.com/Tuplano/agent-office-app-release/releases/tag/v0.3.2) · 2026-10-19 · Pre-release
+## [v0.3.2](https://github.com/Tuplano/agent-office-app-release/releases/tag/v0.3.2) · 2026-10-19
 
 First public release of Agent Office for Windows, macOS and Linux.
 

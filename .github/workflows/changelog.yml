@@ -4,7 +4,7 @@ name: Update changelog
 # notes into CHANGELOG.md and the README's "What's new" section.
 on:
   release:
-    types: [published, edited]
+    types: [published, released, edited]
   workflow_dispatch:
     inputs:
       tag:
