@@ -1,0 +1,56 @@
+name: Update changelog
+
+# Runs when a release is published or its notes are edited, and copies the
+# notes into CHANGELOG.md and the README's "What's new" section.
+on:
+  release:
+    types: [published, edited]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to sync (for example v0.3.2)
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: changelog
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Read release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/$TAG" > release.json
+          newest=$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=1" --jq '.[0].tag_name')
+          echo "is_newest=$([ "$newest" = "$TAG" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Update CHANGELOG.md and README.md
+        env:
+          IS_NEWEST: ${{ steps.release.outputs.is_newest }}
+        run: |
+          export TAG=$(jq -r .tag_name release.json)
+          export BODY=$(jq -r '.body // ""' release.json)
+          export DATE=$(jq -r '.published_at // .created_at' release.json)
+          export PRERELEASE=$(jq -r .prerelease release.json)
+          rm release.json
+          node .github/scripts/update-changelog.js
+
+      - name: Commit
+        run: |
+          if git diff --quiet; then echo "Nothing changed"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -am "docs: changelog for ${{ github.event.release.tag_name || inputs.tag }}"
+          git push

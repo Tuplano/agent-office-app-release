@@ -1,37 +1,122 @@
+<div align="center">
+
 # Agent Office
 
-A desktop app that shows the Claude Code sessions running on your machine as people in a small voxel office. Each session is a worker with a card showing what it is doing, and you get a notification when one starts waiting for you. Subagents show up as interns.
+**See every Claude Code session on your machine as a worker in a small voxel office.**
 
-**[Download the latest version](https://github.com/Tuplano/agent-office-app-release/releases/latest)**. This repo only holds the releases; the code is private.
+[![Latest release](https://img.shields.io/github/v/release/Tuplano/agent-office-app-release?include_prereleases&label=latest&color=2ea44f)](https://github.com/Tuplano/agent-office-app-release/releases)
+[![Downloads](https://img.shields.io/github/downloads/Tuplano/agent-office-app-release/total?color=blue)](https://github.com/Tuplano/agent-office-app-release/releases)
+![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
+
+**[⬇ Download](https://github.com/Tuplano/agent-office-app-release/releases)** · [What's new](#whats-new) · [Install](#install) · [Changelog](CHANGELOG.md)
+
+</div>
+
+---
+
+## What it does
+
+- **One worker per session.** Every Claude Code session running on your computer shows up as a person at a desk.
+- **Live status cards.** Each worker has a card that shows what the session is doing right now.
+- **Notifications when you're needed.** When a session stops and waits for your input, you get a notification.
+- **Interns for subagents.** Subagents that a session starts show up as interns.
+
+> This repository only holds the installers and release notes. The source code is private.
+
+## What's new
+
+<!-- latest:start -->
+### v0.3.2 · 2026-10-19 · Pre-release
+
+First public release of Agent Office for Windows, macOS and Linux.
+
+[See every version in the changelog →](CHANGELOG.md)
+<!-- latest:end -->
+
+## Download
+
+Open the [Releases page](https://github.com/Tuplano/agent-office-app-release/releases), expand **Assets** under the newest version and pick the file for your system:
+
+| System | File to download | Notes |
+| --- | --- | --- |
+| **Windows** | `…_x64-setup.exe` | Recommended for most people |
+| | `…_x64_en-US.msi` | The same app as an MSI package |
+| **macOS (Apple Silicon, M1 and newer)** | `…_aarch64.dmg` | |
+| **macOS (Intel)** | `…_x64.dmg` | |
+| **Ubuntu / Debian** | `…_amd64.deb` | |
+| **Fedora / openSUSE** | `….x86_64.rpm` | |
+| **Any Linux** | `…_amd64.AppImage` | The only Linux format that updates itself |
+
+You can ignore the `.sig`, `.tar.gz` and `latest.json` files. The in-app updater uses them.
 
 ## Install
 
-The installers are not signed with a paid certificate, so Windows and macOS warn you before the first run. The warnings are described below.
+> [!NOTE]
+> The installers are not signed with a paid certificate, so Windows and macOS show a warning the first time you open the app. This is expected. The steps below show how to get past it.
 
-### Ubuntu and Debian
+<details open>
+<summary><b>Windows</b></summary>
 
-Download the `.deb` and install it:
+1. Run the `-setup.exe` (or the `.msi`).
+2. If Windows SmartScreen says **"Windows protected your PC"**, click **More info**, then **Run anyway**.
 
+</details>
+
+<details open>
+<summary><b>macOS</b></summary>
+
+1. Open the `.dmg` and drag **Agent Office** into **Applications**.
+2. The first time you open it, macOS blocks it because the app isn't notarized by Apple.
+3. Go to **System Settings → Privacy & Security**, scroll to the message about "Agent Office" and click **Open Anyway**, then confirm.
+
+If macOS says the app **"is damaged and can't be opened"**, run this once in Terminal:
+
+```sh
+xattr -dr com.apple.quarantine "/Applications/Agent Office.app"
 ```
-sudo apt install ./Agent.Office_0.3.2_amd64.deb
+
+</details>
+
+<details open>
+<summary><b>Linux</b></summary>
+
+**Ubuntu / Debian**
+
+```sh
+sudo apt install ./Agent.Office_*_amd64.deb
 ```
 
-Or download the `.AppImage`, make it executable (`chmod +x`) and run it. The AppImage needs FUSE 2 (`libfuse2` on Ubuntu 22.04 and 24.04).
+**Fedora / openSUSE**
 
-Only the AppImage can update itself. With the `.deb`, the app tells you a new version exists and where to download it.
+```sh
+sudo dnf install ./Agent.Office-*.x86_64.rpm     # Fedora
+sudo zypper install ./Agent.Office-*.x86_64.rpm  # openSUSE
+```
 
-The tray icon needs a desktop that shows tray icons. GNOME does not do so by default; the AppIndicator extension adds it. Without it the app still works, but the icon is not shown: closing the window hides it all the same, and starting the app again brings the window back.
+**AppImage (any distribution)**
 
-### Windows
+```sh
+chmod +x Agent.Office_*_amd64.AppImage
+./Agent.Office_*_amd64.AppImage
+```
 
-Download the `.msi` or the `-setup.exe` and run it. Windows SmartScreen shows "Windows protected your PC". Click "More info", then "Run anyway".
+The AppImage needs FUSE 2 (the `libfuse2` package on Ubuntu 22.04 and 24.04).
 
-### macOS
+**Tray icon:** the tray icon only appears on desktops that support tray icons. GNOME doesn't show them by default, and the [AppIndicator extension](https://extensions.gnome.org/extension/615/appindicator-support/) adds them. The app works without it: closing the window still hides it, and starting the app again brings the window back.
 
-Download the `.dmg` for your Mac: `aarch64` for Apple Silicon, `x64` for Intel. Open it and drag the app to Applications.
+</details>
 
-The app is only ad-hoc signed, not signed by an Apple developer account and not notarized. The first time, macOS refuses to open it. Open System Settings, Privacy & Security, scroll to the message about "Agent Office" being blocked and click "Open Anyway", then confirm. If macOS says the app is damaged, run `xattr -dr com.apple.quarantine "/Applications/Agent Office.app"` once.
+## Updating the app
 
-## Updates
+| Installed with | How updates work |
+| --- | --- |
+| Windows, macOS, AppImage | Updates in the app |
+| `.deb` / `.rpm` | The app tells you when a new version is out. Download it and install it again |
 
-The app looks for a newer version about 20 seconds after it starts, and when you click "Check for updates" in the tray menu. Nothing is downloaded until you click "Update to vX.Y.Z" in the same place. Updates are signed, and the app only accepts ones signed with the author's key.
+- The app checks for a new version about 20 seconds after it starts, and whenever you click **Check for updates** in the tray menu.
+- Nothing downloads until you click **Update to vX.Y.Z**.
+- Every update is signed, and the app only installs updates signed with the author's key.
+
+## Changelog
+
+Every release and what changed in it is listed in **[CHANGELOG.md](CHANGELOG.md)**.
