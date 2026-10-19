@@ -1,15 +1,18 @@
 name: Update changelog
 
 # Runs when a release is published or its notes are edited, and copies the
-# notes into CHANGELOG.md and the README's "What's new" section.
+# notes into CHANGELOG.md and the README's "What's new" section. Once a day it
+# also syncs the newest release, in case a release event did not start it.
 on:
   release:
     types: [published, released, edited]
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag to sync (for example v0.3.2)
-        required: true
+        description: Release tag to sync (for example v0.3.2); empty for the newest
+        required: false
+  schedule:
+    - cron: "17 3 * * *"
 
 permissions:
   contents: write
@@ -24,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.repository.default_branch }}
+          ref: ${{ github.event.repository.default_branch || 'main' }}
 
       - name: Read release
         id: release
@@ -32,8 +35,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.event.release.tag_name || inputs.tag }}
         run: |
+          # drafts are left out: the app repo's build makes one before it is published
+          newest=$(gh api "repos/$GITHUB_REPOSITORY/releases" --jq '[.[] | select(.draft | not)][0].tag_name')
+          TAG=${TAG:-$newest}
           gh api "repos/$GITHUB_REPOSITORY/releases/tags/$TAG" > release.json
-          newest=$(gh api "repos/$GITHUB_REPOSITORY/releases?per_page=1" --jq '.[0].tag_name')
+          if [ "$(jq -r .draft release.json)" = true ]; then echo "$TAG is still a draft"; exit 1; fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "is_newest=$([ "$newest" = "$TAG" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
       - name: Update CHANGELOG.md and README.md
@@ -52,5 +59,5 @@ jobs:
           if git diff --quiet; then echo "Nothing changed"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git commit -am "docs: changelog for ${{ github.event.release.tag_name || inputs.tag }}"
+          git commit -am "docs: changelog for ${{ steps.release.outputs.tag }}"
           git push
