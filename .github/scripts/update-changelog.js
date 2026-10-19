@@ -17,7 +17,8 @@ const notes = (process.env.BODY || '')
   .trim();
 
 // Empty notes never overwrite an entry that was written by hand.
-if (!notes && fs.readFileSync('CHANGELOG.md', 'utf8').includes(`## [${tag}]`)) {
+const existing = fs.readFileSync('CHANGELOG.md', 'utf8');
+if (!notes && (existing.includes(`## [${tag}]`) || existing.includes(`## ${tag} `))) {
   console.log(`${tag} has no notes; keeping the existing changelog entry.`);
   process.exit(0);
 }
@@ -29,9 +30,9 @@ const entry = `${heading}\n\n${notes || 'Maintenance release.'}\n`;
 const changelog = fs.readFileSync('CHANGELOG.md', 'utf8').replace(/\r\n/g, '\n');
 const marker = '<!-- releases -->\n';
 const [head, rest = ''] = changelog.split(marker);
-const sections = rest.split(/^(?=## \[)/m).filter(s => s.trim());
-const tagHeading = `## [${tag}]`;
-const index = sections.findIndex(s => s.startsWith(tagHeading));
+// entries are "## [v1.2.3](link) · date", or "## v1.2.3 · date" for versions with no release here
+const sections = rest.split(/^(?=## )/m).filter(s => s.trim());
+const index = sections.findIndex(s => s.startsWith(`## [${tag}]`) || s.startsWith(`## ${tag} `));
 if (index >= 0) sections[index] = entry;
 else sections.unshift(entry);
 fs.writeFileSync('CHANGELOG.md', head + marker + sections.map(s => s.trimEnd() + '\n').join('\n'));

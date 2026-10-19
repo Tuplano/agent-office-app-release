@@ -1,5 +1,7 @@
 <!--
-Paste this into the description of a new GitHub release and fill it in.
+Releases built by the app repo already get their notes from its CHANGELOG.md.
+Use this only for a release made by hand here: paste it into the description
+and fill it in.
 Remove any section you don't need. When you publish, everything above
 "## Which file do I download?" is copied into CHANGELOG.md and the
 "What's new" section of the README.

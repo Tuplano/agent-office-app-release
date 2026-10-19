@@ -21,11 +21,48 @@ Updates are signed, and the app only installs ones signed with the author's key.
 <!-- releases -->
 ## [v0.3.2](https://github.com/Tuplano/agent-office-app-release/releases/tag/v0.3.2) · 2026-10-19
 
-First public release of Agent Office for Windows, macOS and Linux.
+The first version on this download page.
+
+## v0.3.1 · 2026-10-15
+
+_Released before this download page existed, so there is no download for it here. The newest version has everything in it._
+
+### Fixed
+- Codex and Antigravity (`agy`) sessions are picked up more reliably, and their tool calls show correctly.
+
+## v0.3.0 · 2026-10-14
+
+_Released before this download page existed, so there is no download for it here. The newest version has everything in it._
 
 ### Added
-- Every Claude Code session on the machine shown as a worker in a voxel office, each with a live status card.
-- A notification when a session starts waiting for your input.
-- Subagents shown as interns.
-- A tray icon with **Check for updates**, plus signed in-app updates for Windows, macOS and the Linux AppImage.
-- Installers for Windows (`.exe`, `.msi`), macOS (Apple Silicon and Intel `.dmg`) and Linux (`.deb`, `.rpm`, `.AppImage`).
+- **You in the room**: a character of your own walks around the office. Click the floor to walk there, and pick your look in Settings.
+- Talk to workers, pet the cat, and use the furniture from a menu that appears when you click a piece.
+- Start new sessions from the app with **+**: pick Claude Code, Codex, Gemini or Antigravity and a folder, and the session runs in a terminal inside the app. Click its worker to type to it.
+- Click any worker to open a side panel that shows its session's conversation live: your prompts, the replies and each tool it calls.
+- Codex and Antigravity (`agy`) sessions now show up in the office, alongside Claude Code.
+- For sessions started in another terminal, the app can bring that window to the front, such as "Reply in VS Code".
+
+## v0.2.0 · 2026-10-14
+
+_Released before this download page existed, so there is no download for it here. The newest version has everything in it._
+
+### Added
+- Music: a calm tune made up on the spot inside the app, with nothing downloaded. Turn it on with the note button.
+- Settings for the theme and the music.
+- Build walls inside the room: walls, glass walls, half walls and office doors, drawn with a click at each end.
+- New furniture: a boss's desk, cubicles, a meeting table that seats twelve, a filing cabinet, a water cooler, a fridge, a vending machine and a whiteboard.
+- More ready-made rooms to start from, in other sizes.
+
+## v0.1.0 · 2026-10-13
+
+_Released before this download page existed, so there is no download for it here. The newest version has everything in it._
+
+### Added
+- Your Claude Code sessions shown as workers in a voxel office, each with a card showing what it is doing. Subagents show up as interns.
+- Workers walk in through the door when a session starts and leave when it ends. Workers without a free chair sit in the lounge or on the floor.
+- A notification, and an orange dot on the tray icon, when a session is waiting for you.
+- The app keeps running in the tray when its window is closed, with an option to launch at login.
+- Edit the room: move, turn, add and remove furniture, resize the room and recolor anything.
+- Ready-made rooms to start from, and copy a room as text to paste into another office.
+- Bring in your own furniture made in Blender (`.glb`) or MagicaVoxel (`.vox`).
+- Signed updates installed from the tray menu.
