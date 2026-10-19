@@ -21,7 +21,13 @@ Updates are signed, and the app only installs ones signed with the author's key.
 <!-- releases -->
 ## [v0.3.2](https://github.com/Tuplano/agent-office-app-release/releases/tag/v0.3.2) · 2026-10-19
 
-The first version on this download page.
+### Added
+- Every worker wears a badge showing which tool runs their session, on their shirt and on their laptop lid: Claude's orange spark, Gemini's star (also worn by Antigravity), or `>_` for Codex.
+- Your character nods off on the floor when nobody has touched the mouse or keyboard for about a minute, and wakes up and carries on when you come back.
+- Choose which device the music plays on ("Play on" in Settings). If that device is unplugged, the music plays through your usual output and moves back when it returns.
+
+### Changed
+- Music now plays through the app itself, with its own volume control.
 
 ## v0.3.1 · 2026-10-15
 
