@@ -19,6 +19,17 @@ Updates are signed, and the app only installs ones signed with the author's key.
 ---
 
 <!-- releases -->
+## [v0.3.3](https://github.com/Tuplano/agent-office-app-release/releases/tag/v0.3.3) · 2026-10-21
+
+### Added
+- Dress every worker: pick their hair, accessory, shirt, pants and shoes, each in any colour, or press Randomize for a whole new outfit. What you pick is remembered.
+- Choose the office pet: a cat, a dog or a rabbit, in 21 breeds from a pug or a corgi to a Siamese or a lop. Pick "Choose another pet" from the pet's menu.
+- Dress the pet too, in one of 12 things in any colour: a collar, a collar and bell, a bandana, a scarf, a bow tie, a bow, a party hat, a crown, a flower, sunglasses, a sweater or a cape.
+
+### Changed
+- Clicking a worker opens a bigger panel: their outfit on the left and their session on the right.
+- Your own look is now changed the same way: click your name tag in the room. It has moved out of Settings.
+
 ## [v0.3.2](https://github.com/Tuplano/agent-office-app-release/releases/tag/v0.3.2) · 2026-10-19
 
 ### Added

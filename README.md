@@ -26,15 +26,16 @@
 ## What's new
 
 <!-- latest:start -->
-### v0.3.2 · 2026-10-19
+### v0.3.3 · 2026-10-21
 
 #### Added
-- Every worker wears a badge showing which tool runs their session, on their shirt and on their laptop lid: Claude's orange spark, Gemini's star (also worn by Antigravity), or `>_` for Codex.
-- Your character nods off on the floor when nobody has touched the mouse or keyboard for about a minute, and wakes up and carries on when you come back.
-- Choose which device the music plays on ("Play on" in Settings). If that device is unplugged, the music plays through your usual output and moves back when it returns.
+- Dress every worker: pick their hair, accessory, shirt, pants and shoes, each in any colour, or press Randomize for a whole new outfit. What you pick is remembered.
+- Choose the office pet: a cat, a dog or a rabbit, in 21 breeds from a pug or a corgi to a Siamese or a lop. Pick "Choose another pet" from the pet's menu.
+- Dress the pet too, in one of 12 things in any colour: a collar, a collar and bell, a bandana, a scarf, a bow tie, a bow, a party hat, a crown, a flower, sunglasses, a sweater or a cape.
 
 #### Changed
-- Music now plays through the app itself, with its own volume control.
+- Clicking a worker opens a bigger panel: their outfit on the left and their session on the right.
+- Your own look is now changed the same way: click your name tag in the room. It has moved out of Settings.
 
 [See every version in the changelog →](CHANGELOG.md)
 <!-- latest:end -->
