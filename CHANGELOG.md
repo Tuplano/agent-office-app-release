@@ -19,6 +19,11 @@ Updates are signed, and the app only installs ones signed with the author's key.
 ---
 
 <!-- releases -->
+## [v0.3.4](https://github.com/Tuplano/agent-office-app-release/releases/tag/v0.3.4) · 2026-10-27
+
+### Added
+- Settings now shows which version you're running, with a button to check for an update and install it.
+
 ## [v0.3.3](https://github.com/Tuplano/agent-office-app-release/releases/tag/v0.3.3) · 2026-10-21
 
 ### Added
